@@ -1,5 +1,6 @@
-// src/migrate.js
-const Database = require('../services/database/connect');
+require('dotenv').config(); // Load environment variables at the top
+const { Sequelize } = require('sequelize'); // Import Sequelize
+const Database = require('./services/database/connect');
 const { readdirSync } = require('fs');
 const { join } = require('path');
 
@@ -13,7 +14,7 @@ async function migrate() {
 
     for (const file of migrationFiles) {
       const migration = require(join(migrationsDir, file));
-      await migration.up();
+      await migration.up(Database.getQueryInterface(), Sequelize); // Pass the Sequelize constructor
       console.log(`Migration ${file} ran successfully.`);
     }
 
