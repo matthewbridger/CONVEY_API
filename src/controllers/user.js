@@ -29,3 +29,22 @@ exports.getUser = async (req, res, next) => {
         res.send(error);
     }
 };
+
+// Add User
+exports.addUser = async (req, res, next) => {
+    try {
+        // Clone request body to a user object
+        const user = { ...req.body };
+
+        // Create row in database
+        const dbResponse = await User.create(user);
+
+        // Return result
+        res.status(201);
+        res.send(dbResponse.dataValues);
+    }
+    catch (error) {
+        res.status(400);
+        res.send(error);
+    }
+};
