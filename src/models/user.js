@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const Database = require('../services/database/connect');
+const Permission = require('./permission');
 const bcrypt = require('bcrypt');
 
 const User = Database.define('user', {
@@ -40,5 +41,8 @@ const User = Database.define('user', {
 User.beforeCreate(async (user) => {
     user.password = await bcrypt.hash(user.password, 10);
 });
+
+// Relationships
+User.belongsTo(Permission, { foreignKey: 'permissionId', as: 'permission' });
 
 module.exports = User;
