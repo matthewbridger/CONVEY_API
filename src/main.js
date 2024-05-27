@@ -22,6 +22,7 @@ const cookieParser = require('cookie-parser');
 
 // Import middleware
 const publicMiddleware = require('./middleware/public');
+const privateMiddleware = require('./middleware/private');
 
 // Import Routes
 const authRoutes = require('./routes/auth');
@@ -44,7 +45,7 @@ app.use(router);
 app.use('/api/v1/authentication', publicMiddleware, authRoutes);
 
 // Add private routes
-app.use('/api/v1/user', userRoutes);
+app.use('/api/v1/user', privateMiddleware, userRoutes);
 
 // Error handling
 app.use(errorRoutes);
