@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const Database = require('../services/database/connect');
 
-const Permission = Database.define('permission', {
+const Permission = Database.define('permissions', {
     id: {
         primaryKey: true,
         type: Sequelize.INTEGER,

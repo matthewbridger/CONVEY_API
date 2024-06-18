@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const Database = require('../services/database/connect');
 const Product = require('./product');
 
-const ProductVariation = Database.define('productVariation', {
+const ProductVariation = Database.define('productVariations', {
     id: {
         primaryKey: true,
         type: Sequelize.INTEGER,

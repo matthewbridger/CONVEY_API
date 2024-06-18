@@ -6,6 +6,8 @@ exports.getUsers = async (req, res, next) => {
         // Execute SQL
         const dbResponse = await User.findAll();
 
+        console.log(User);
+
         // Return result
         res.send(dbResponse);
     }

@@ -3,7 +3,7 @@ const Database = require('../services/database/connect');
 const Permission = require('./permission');
 const bcrypt = require('bcrypt');
 
-const User = Database.define('user', {
+const User = Database.define('users', {
     id: {
         primaryKey: true,
         type: Sequelize.INTEGER,

@@ -3,7 +3,7 @@ const Database = require('../services/database/connect');
 const User = require('./user');
 const FormatDate = require('../services/format/date');
 
-const Session = Database.define('session', {
+const Session = Database.define('sessions', {
     id: {
         primaryKey: true,
         type: Sequelize.STRING,
