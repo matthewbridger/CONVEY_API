@@ -25,6 +25,10 @@ const publicMiddleware = require('./middleware/public');
 const privateMiddleware = require('./middleware/private');
 
 // Import Routes
+const productRoutes = require('./routes/product');
+const productVariationRoutes = require('./routes/productVariation');
+const statisticRoutes = require('./routes/statistic');
+const customerRoutes = require('./routes/customer');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const errorRoutes = require('./routes/_error');
@@ -45,17 +49,25 @@ app.use(router);
 app.use('/api/v1/authentication', publicMiddleware, authRoutes);
 
 // Add private routes
+app.use('/api/v1/customer', privateMiddleware, customerRoutes);
+app.use('/api/v1/product', privateMiddleware, productRoutes);
+app.use('/api/v1/product-variation', privateMiddleware, productVariationRoutes);
+app.use('/api/v1/statistic', privateMiddleware, statisticRoutes);
 app.use('/api/v1/user', privateMiddleware, userRoutes);
 
 // Error handling
 app.use(errorRoutes);
 
+// Init Tables
 require('./models/user');
 require('./models/permission');
 require('./models/session');
+require('./models/productVariation');
+require('./models/product');
+require('./models/customer');
 
 // Launch API
-Database.sync({ force: true })
+Database.sync({ force: false })
     .then(() => {
         app.listen(process.env.LAUNCH_PORT, () => {
             Log.console('server', `is running on port ${process.env.LAUNCH_PORT}`);
